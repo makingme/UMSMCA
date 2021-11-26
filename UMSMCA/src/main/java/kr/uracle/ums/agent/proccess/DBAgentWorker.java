@@ -12,7 +12,7 @@ import kr.uracle.ums.agent.core.TaskWorker;
 import kr.uracle.ums.agent.exception.NONConfigVariableSetException;
 import kr.uracle.ums.agent.util.CommonXMLConfig;
 
-public class DBAgentTask extends TaskWorker{
+public class DBAgentWorker extends TaskWorker{
 	
 	
 	/*
@@ -72,9 +72,9 @@ public class DBAgentTask extends TaskWorker{
 	}
 
 
-	private static final Logger logger = LoggerFactory.getLogger(DBAgentTask.class);
+	private static final Logger logger = LoggerFactory.getLogger(DBAgentWorker.class);
 	
-	public DBAgentTask(String taskName, CommonXMLConfig config) throws Exception {
+	public DBAgentWorker(String taskName, CommonXMLConfig config) throws Exception {
 		super(taskName, config);
 	}
 	

@@ -22,10 +22,10 @@ import org.slf4j.LoggerFactory;
 import kr.uracle.ums.agent.core.DBCPDataSourceFactory;
 import kr.uracle.ums.agent.exception.NONConfigVariableSetException;
 import kr.uracle.ums.agent.exception.NotSupportSQLSyntaxException;
-import kr.uracle.ums.agent.proccess.ResultTask;
+import kr.uracle.ums.agent.proccess.ResultWorker;
 
 public class SQLConverter {
-	private static final Logger logger = LoggerFactory.getLogger(ResultTask.class);
+	private static final Logger logger = LoggerFactory.getLogger(ResultWorker.class);
 
 	String sourceSQL="";
 	String executeSQL="";

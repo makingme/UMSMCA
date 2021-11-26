@@ -55,9 +55,9 @@ import kr.uracle.ums.agent.util.SQLConverter;
  * 	채널 결과 테이블 DELETE: 		
  * 
  */
-public class ResultTask extends TaskWorker{
+public class ResultWorker extends TaskWorker{
 	
-	private static final Logger logger = LoggerFactory.getLogger(ResultTask.class);
+	private static final Logger logger = LoggerFactory.getLogger(ResultWorker.class);
 	
 	final static int SUCCESS=1;
 	final static int FAILNORESEND=2;
@@ -158,11 +158,11 @@ public class ResultTask extends TaskWorker{
 		logger.info("#################################################");
 	}
 	
-	public ResultTask(String taskName, CommonXMLConfig config) throws Exception {
+	public ResultWorker(String taskName, CommonXMLConfig config) throws Exception {
 		super(taskName, config);
 	}
 	
-	public ResultTask(String taskName) throws Exception {
+	public ResultWorker(String taskName) throws Exception {
 		super(taskName);
 	}
 	
@@ -320,7 +320,7 @@ public class ResultTask extends TaskWorker{
 	}
 	
 	public static void main(String[] args) throws Exception {
-		TaskWorker tw=new ResultTask("ALTResultHandler");
+		TaskWorker tw=new ResultWorker("ALTResultHandler");
 		tw.start();
 	}
 }
