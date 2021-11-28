@@ -197,6 +197,16 @@ public class ResultWorker extends TaskWorker{
 			int rowcount = 0;
 			StringBuilder sb=null;
 			Map<String, String> rsMap=null;
+			
+			//preparedstatement 초기화
+			succUpdateDetail = conn.prepareStatement(updateDetailSQL.getExecuteSQL());
+			failUpdateDetailNoResend = conn.prepareStatement(updateDetailSQL.getExecuteSQL());
+			failUpdateDetailResend = conn.prepareStatement(updateDetailSQL.getExecuteSQL());
+			insertResend = conn.prepareStatement(insertResendSQL.getExecuteSQL());
+			insertReDetail = conn.prepareStatement(insertResendDetailSQL.getExecuteSQL());
+			updateLedger = conn.prepareStatement(updateLedgerSQL.getExecuteSQL());
+			upsertStatistics = conn.prepareStatement(upsertStatisticsSQL.getExecuteSQL());
+			commonDeleteResult= conn.prepareStatement(deleteResultSQL.getExecuteSQL());
 			while(selectRS.next()) {
 				//스크립트 수행결과 변수
 				rslt=0;
@@ -228,17 +238,7 @@ public class ResultWorker extends TaskWorker{
 								
 				//rslt 1이면 성공, 2이면 전환발송X 실패, 3이면 전환 발송 실패, 4이면 데이터 이상
 				//3이면 선처리 전환발송 INSERT 수행
-				rslt=Integer.parseInt(rsObj.toString());
-				
-				//preparedstatement 초기화
-				succUpdateDetail = conn.prepareStatement(updateDetailSQL.getExecuteSQL());
-				failUpdateDetailNoResend = conn.prepareStatement(updateDetailSQL.getExecuteSQL());
-				failUpdateDetailResend = conn.prepareStatement(updateDetailSQL.getExecuteSQL());
-				insertResend = conn.prepareStatement(insertResendSQL.getExecuteSQL());
-				insertReDetail = conn.prepareStatement(insertResendDetailSQL.getExecuteSQL());
-				updateLedger = conn.prepareStatement(updateLedgerSQL.getExecuteSQL());
-				upsertStatistics = conn.prepareStatement(upsertStatisticsSQL.getExecuteSQL());
-				commonDeleteResult= conn.prepareStatement(deleteResultSQL.getExecuteSQL());
+				rslt=Integer.parseInt(rsObj.toString());		
 				
 				if(rslt==1) {
 					updateDetailSQL.setSQLVar(succUpdateDetail, rsMap);
@@ -302,21 +302,21 @@ public class ResultWorker extends TaskWorker{
 			rslt=rowcount;
 			conn.close();
 		} catch (SQLException e) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
+			if(conn != null)try { conn.close(); } catch(SQLException e1) {e1.printStackTrace();};
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} finally {			
 			jsContext.clearStackMap();
-			try {
-				if(conn!=null)conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			if(conn != null)try { conn.close(); } catch(SQLException e) {};
+			if(select != null)try { select.close(); } catch(SQLException e) {};
+			if(succUpdateDetail != null)try { succUpdateDetail.close(); } catch(SQLException e) {};
+			if(failUpdateDetailNoResend != null)try { failUpdateDetailNoResend.close(); } catch(SQLException e) {};
+			if(failUpdateDetailResend != null)try { failUpdateDetailResend.close(); } catch(SQLException e) {};
+			if(insertResend != null)try { insertResend.close(); } catch(SQLException e) {};
+			if(insertReDetail != null)try { insertReDetail.close(); } catch(SQLException e) {};
+			if(updateLedger != null)try { updateLedger.close(); } catch(SQLException e) {};
+			if(upsertStatistics != null)try { upsertStatistics.close(); } catch(SQLException e) {};
+			if(commonDeleteResult != null)try { commonDeleteResult.close(); } catch(SQLException e) {};			
 		}		
 		return rslt;
 	}
