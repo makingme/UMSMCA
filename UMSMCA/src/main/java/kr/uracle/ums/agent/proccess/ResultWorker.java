@@ -274,6 +274,8 @@ public class ResultWorker extends TaskWorker{
 				deleteResultSQL.setSQLVar(commonDeleteResult, rsMap);
 				commonDeleteResult.addBatch();
 				rowcount++;
+				rsMap.clear();
+				jsContext.clearStackMap();
 			}//while문 종료 지점
 //			if(rowcount !=0 && rowcount !=fetchCount) {
 //				logger.error("SELECT ROW 갯수와 처리 갯수 불일치, SELECT COUNT:"+fetchCount+", 처리 COUNT:"+rowcount);
@@ -308,7 +310,7 @@ public class ResultWorker extends TaskWorker{
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} finally {
+		} finally {			
 			jsContext.clearStackMap();
 			try {
 				if(conn!=null)conn.close();

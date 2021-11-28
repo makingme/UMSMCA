@@ -258,9 +258,11 @@ public abstract class TaskWorker extends Thread{
 		if(time==0)time=1;
 		sectionTime+=time;
 		sectionCount+=count;
-		logger.info("1 Cycle TPS, Lead Time:"+(time/1000)+"Sec, Proccessed Count:"+count+", TPS:"+(count/(time/1000)));
+		int realTime=(int) ((time/1000)==0?1:(time/1000));
+		logger.info("1 Cycle TPS, Lead Time: "+(realTime)+"Sec, Proccessed Count: "+count+", TPS: "+(count/realTime)+"tps");
 		if(sectionTime>30000) {
-			logger.info("Section TPS(During 30s), Lead Time:"+(sectionTime/1000)+"Sec, Proccessed Count:"+sectionCount+", TPS:"+(sectionCount/(sectionTime/1000)));
+			realTime=(int) ((sectionTime/1000)==0?1:(sectionTime/1000));
+			logger.info("Section TPS(During 30s), Lead Time:"+realTime+"Sec, Proccessed Count:"+sectionCount+", TPS:"+(sectionCount/realTime));
 			sectionTime=0;
 			sectionCount=0;
 		}

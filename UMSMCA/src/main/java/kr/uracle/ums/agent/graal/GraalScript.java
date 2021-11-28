@@ -89,6 +89,6 @@ public class GraalScript {
 	}
 
 	public void executeScript() throws Exception {	
-		compiledScript.eval(bindings);			
+		compiledScript.eval(bindings);
 	}
 }
