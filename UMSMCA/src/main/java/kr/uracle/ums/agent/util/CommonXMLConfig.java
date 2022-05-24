@@ -23,8 +23,6 @@ public class CommonXMLConfig {
 			String key=it.next();
 			confMap.put(key, xmlConfig.getString(key));
 		}
-		
-
 		return confMap;
 	}
 }

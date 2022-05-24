@@ -83,8 +83,8 @@ public class SQLConverter {
 				throw new NONConfigVariableSetException("SQL 문법 오류...");
 			}
 			convertSQL=convertSQL.replace(target, value);
-			
 		}
+		executeSQL = convertSQL;
 		return convertSQL;
 	}
 	

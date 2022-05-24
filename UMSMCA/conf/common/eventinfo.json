@@ -1,0 +1,124 @@
+{
+	"begin_app":{
+		"user_id" 		:	 "true",	
+		"device_id" 	:	 "true",
+		"device_model" 	:	 "true",
+		"os_version" 	:	 "true",
+		"app_version" 	:	 "true",
+		"state" 		:	 "true",
+		"date" 			:	 "true",
+		"online" 		:	 "true"
+	},
+	
+	"begin_content":{
+		"user_id":			"true",
+		"device_id":		"true",
+		"device_model":		"true",
+		"os_version":		"true",
+		"app_version":		"true",
+		"content_id":		"true",
+		"content_url":		"true",
+		"play_type":		"true",
+		"state":			"true",
+		"date":				"true",
+		"online":			"true"
+	},
+
+	"playing_content":{
+		"user_id" :					"true",
+		"device_id" :				"true",
+		"device_model" :			"true",
+		"os_version" :				"true",
+		"app_version" :				"true",
+		"content_id" :				"true",
+		"content_url" :				"true",
+		"play_type" :				"true",
+		"play_time" :				"true",
+		"play_time2" :				"true",
+		"latest_playtime" :			"true",
+		"latest_playtime2" :		"true",
+		"latest_ratio_playtime" :	"true",
+		"loopback_playtime" :		"true",
+		"content_duration" :		"true",
+		"current_position" :		"true",
+		"date" :					"true",
+		"online" :					"true",
+		"play_ratio" :				"true"
+	},
+	
+	"playing_ratio_status":{
+		"user_id" :				"true",
+		"device_id" :			"true",
+		"device_model" :		"true",
+		"os_version" :			"true",
+		"app_version" :			"true",
+		"content_id" :			"true",
+		"content_url" :			"true",
+		"play_type" :			"true",
+		"play_time2" :			"true",
+		"latest_playtime2" :	"true",
+		"content_duration" :	"true",
+		"current_position" :	"true",
+		"date" :				"true",
+		"online" :				"true",
+		"play_ratio" :			"true"
+	},
+	
+	"end_content":{
+		"user_id" :					"true",
+		"device_id" :				"true",
+		"device_model" :			"true",
+		"os_version" :				"true",
+		"app_version" :				"true",
+		"content_id" :				"true",
+		"content_url" :				"true",
+		"play_type" :				"true",
+		"play_time" :				"true",
+		"play_time2" :				"true",
+		"latest_playtime" :			"true",
+		"latest_playtime2" :		"true",
+		"sum_latest_playtime" :		"true",
+		"sum_latest_playtime2" :	"true",
+		"latest_ratio_playtime" :	"true",
+		"loopback_playtime" :		"true",
+		"content_duration" :		"true",
+		"current_position" :		"true",
+		"date" :					"true",
+		"begin_content_date" :		"true",
+		"online" :					"true"	
+	},
+	
+	"delete_content": {
+		"user_id" :			"true",
+		"device_id" :		"true",
+		"device_model" :	"true",
+		"os_version" :		"true",
+		"app_version" :		"true",
+		"content_id" :		"true",
+		"content_url" :		"true",
+		"date" :			"true"		
+	},
+	
+	"register_device_id": {
+		"user_id" :			"true",
+		"device_id" :		"true",
+		"device_model" :	"true",
+		"os_version" :		"true",
+		"app_version" :		"true",
+		"play_type" :		"true",
+		"date" :			"true",
+		"online" :			"true"		
+	},
+	
+	"unregister_device_id":{
+		"unregister_device_id" :	"true",
+		"user_id" :					"true",
+		"device_id" :				"true",
+		"device_model" :			"true",
+		"os_version" :				"true",
+		"app_version" :				"true",
+		"date" :					"true",
+		"online" :					"true"		
+	}
+}
+

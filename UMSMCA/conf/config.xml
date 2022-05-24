@@ -3,20 +3,17 @@
 	<global>
 	
 	</global>
-	<AgentMNGName>
-		<targetList>agent-a,agent-b</targetList>
-		<agnet-a>
-			<class>DBAgentTask</class>
-		</agnet-a>
-		<agnet-b>
-			<class>DBAgentTask</class>
-		</agnet-b>
-	</AgentMNGName>
-	<ALTResultHandler>
+	<AgentMNGS>
+		<AgentMNG>
+			<name></name>
+			<targets>ALTResultWorker</targets>
+			<ALTResultWorker>
+				<class>ResultWorker</class>
+			</ALTResultWorker>
+		</AgentMNG>
+	</AgentMNGS>
+	<ALTResultWorker>
 		<enableInclude>N</enableInclude>
 		<waitOnNoData>2</waitOnNoData>
-	</ALTResultHandler>
-	<agnet-b>
-		<enableInclude>Y</enableInclude>
-	</agnet-b>
+	</ALTResultWorker>
 </configuration>

@@ -1,0 +1,49 @@
+{
+	"folders": {},
+	"connections": {
+		"mysql8-17d6e59d612-d20007d930ac8cb": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "dmaru",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "133.186.223.114",
+				"port": "2001",
+				"database": "dmaru",
+				"url": "jdbc:mysql://133.186.223.114:2001/dmaru",
+				"home": "mysql_client",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		},
+		"mysql8-17d9238bd92-3acb83cd3ce68f0c": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "dmaru 2",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "112.217.168.243",
+				"port": "13306",
+				"database": "dmaru",
+				"url": "jdbc:mysql://112.217.168.243:13306/dmaru",
+				"home": "mysql_client",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}

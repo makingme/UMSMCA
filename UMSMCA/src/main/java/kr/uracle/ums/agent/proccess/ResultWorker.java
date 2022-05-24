@@ -57,7 +57,7 @@ import kr.uracle.ums.agent.util.SQLConverter;
  */
 public class ResultWorker extends TaskWorker{
 	
-	private static final Logger logger = LoggerFactory.getLogger(ResultWorker.class);
+	private static final Logger log = LoggerFactory.getLogger(ResultWorker.class);
 	
 	final static int SUCCESS=1;
 	final static int FAILNORESEND=2;
@@ -142,10 +142,10 @@ public class ResultWorker extends TaskWorker{
 				break;
 			}
 			if(dumpSQL == null) {
-				logger.info(key+" SQL, Convert Complete!!");
-				logger.info("["+tempSQL.getExecuteSQL()+"]");
+				log.info(key+" SQL, Convert Complete!!");
+				log.info("["+tempSQL.getExecuteSQL()+"]");
 			}else {
-				logger.info("Throw away :"+dumpSQL);
+				log.info("Throw away :"+dumpSQL);
 			}
 			
 		}
@@ -155,7 +155,7 @@ public class ResultWorker extends TaskWorker{
 		if(!fcn.equals("")) {
 			fetchCount=Integer.parseInt(fcn);
 		}
-		logger.info("#################################################");
+		log.info("#################################################");
 	}
 	
 	public ResultWorker(String taskName, CommonXMLConfig config) throws Exception {
@@ -221,7 +221,7 @@ public class ResultWorker extends TaskWorker{
 					rsMap.put(key, value);
 					sb.append(key+":"+value+", ");
 				}
-				logger.debug(sb.substring(0, sb.length()-2));
+				log.debug(sb.substring(0, sb.length()-2));
 				
 				//hadle.js 스크립트 수행
 				handleGraal.putBinding("RSMAP", rsMap);
@@ -229,7 +229,7 @@ public class ResultWorker extends TaskWorker{
 					jsContext.stack("TASKNAME", taskName);
 					handleGraal.executeScript();
 				} catch (Exception e) {
-					logger.error("handl.js 실행 중 에러 발생.....");
+					log.error("handl.js 실행 중 에러 발생.....");
 					e.printStackTrace();
 				}
 				//hadle.js 수행 후 전달 PARAMS중 rslt 값 확인
@@ -258,7 +258,7 @@ public class ResultWorker extends TaskWorker{
 					failResendCnt++;
 				}else {
 					rsMap.clear();
-					logger.warn("Check the hadle.js's rslt setting value...rslt is not supported value ["+rslt+"]");
+					log.warn("Check the hadle.js's rslt setting value...rslt is not supported value ["+rslt+"]");
 					continue;
 				}
 				//실패 시 원장 통계 처리  
@@ -322,7 +322,9 @@ public class ResultWorker extends TaskWorker{
 	}
 	
 	public static void main(String[] args) throws Exception {
-		TaskWorker tw=new ResultWorker("ALTResultHandler");
-		tw.start();
+		String name="ALTResultWorker";
+		TaskWorker tw=new ResultWorker(name);
+		Thread th = new Thread(tw);
+		th.start();
 	}
 }

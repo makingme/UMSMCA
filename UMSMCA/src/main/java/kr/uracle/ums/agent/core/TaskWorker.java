@@ -15,7 +15,7 @@ import kr.uracle.ums.agent.graal.JScriptContext;
 import kr.uracle.ums.agent.graal.ScriptManager;
 import kr.uracle.ums.agent.util.CommonXMLConfig;
 
-public abstract class TaskWorker extends Thread{
+public abstract class TaskWorker implements Runnable{
 	
 	/*
 	 *	필수 환경 변수
@@ -31,7 +31,7 @@ public abstract class TaskWorker extends Thread{
 	 *
 	 *  
 	*/	
-	private static final Logger logger = LoggerFactory.getLogger(TaskWorker.class);
+	private static final Logger log = LoggerFactory.getLogger(TaskWorker.class);
 	
 	private final static int NODATA=0;
 	private final static int WAIT=-1;
@@ -73,9 +73,8 @@ public abstract class TaskWorker extends Thread{
 	}
 
 	public void init() {
-		this.setName(taskName);
-		logger.info("#################################################");
-		logger.info("##"+taskName+": Initialize Start~~.##");
+		log.info("#################################################");
+		log.info("##{}: Initialize Start~~.##",taskName);
 		
 		//설정 Loading....
 		if(config ==null) {
@@ -128,10 +127,10 @@ public abstract class TaskWorker extends Thread{
 		
 		// Task init.js 실행
 		try {
-			logger.info(taskName+": Execute Script [{}]", "init.js");
+			log.info(taskName+": Execute Script [{}]", "init.js");
 			initGraal.executeScript();
 		} catch (Exception e) {
-			logger.error("Exception occured while executing init.js", e);
+			log.error("Exception occured while executing init.js", e);
 		}
 		
 		// init.js 수행시 스크립트단 전달 데이터 Map
@@ -173,7 +172,7 @@ public abstract class TaskWorker extends Thread{
 				totalCount+=rslt;
 				printTPS(requiredTime, rslt);
 			}else if(rslt==TaskWorker.NODATA) {
-				logger.info("DATA 없음으로 "+waitOnNoData/1000+"초 동안 대기");
+				log.info("DATA 없음으로 "+waitOnNoData/1000+"초 동안 대기");
 				long wait = 0 ;
 				synchronized(this)
 				{
@@ -192,7 +191,7 @@ public abstract class TaskWorker extends Thread{
 				synchronized(this)
 				{
 					if(maxErrorLoopTime>errorSleep) {
-						logger.error("수행 중 에러로 인한 "+errorSleep/1000+"초 동안 IDLE 상태로 전환");
+						log.error("수행 중 에러로 인한 "+errorSleep/1000+"초 동안 IDLE 상태로 전환");
 						while ( wait < errorSleep ){
 							try {
 								this.wait(errorSleep);
@@ -204,7 +203,7 @@ public abstract class TaskWorker extends Thread{
 						}
 						errorSleep+=errorSleep;						
 					}else {
-						logger.error("에러 로그 출력 제한 시간("+maxErrorLoopTime/1000+"초) 초과로 인한 프로세스 중지");
+						log.error("에러 로그 출력 제한 시간("+maxErrorLoopTime/1000+"초) 초과로 인한 프로세스 중지");
 						isWorking=false;
 					}
 				}
@@ -259,10 +258,10 @@ public abstract class TaskWorker extends Thread{
 		sectionTime+=time;
 		sectionCount+=count;
 		int realTime=(int) ((time/1000)==0?1:(time/1000));
-		logger.info("1 Cycle TPS, Lead Time: "+(realTime)+"Sec, Proccessed Count: "+count+", TPS: "+(count/realTime)+"tps");
+		log.info("1 Cycle TPS, Lead Time: "+(realTime)+"Sec, Proccessed Count: "+count+", TPS: "+(count/realTime)+"tps");
 		if(sectionTime>30000) {
 			realTime=(int) ((sectionTime/1000)==0?1:(sectionTime/1000));
-			logger.info("Section TPS(During 30s), Lead Time:"+realTime+"Sec, Proccessed Count:"+sectionCount+", TPS:"+(sectionCount/realTime));
+			log.info("Section TPS(During 30s), Lead Time:"+realTime+"Sec, Proccessed Count:"+sectionCount+", TPS:"+(sectionCount/realTime));
 			sectionTime=0;
 			sectionCount=0;
 		}
